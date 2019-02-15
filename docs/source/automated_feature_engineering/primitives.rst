@@ -19,7 +19,6 @@ DFS achieves the same feature by stacking two primitives ``"time_since_previous"
 
     import featuretools as ft
     es = ft.demo.load_mock_customer(return_entityset=True)
-    es
 
 .. ipython:: python
 
