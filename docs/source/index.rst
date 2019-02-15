@@ -4,12 +4,13 @@
    contain the root `toctree` directive.
 
 .. currentmodule:: featuretools
-
+.. image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/Featuretools/featuretools/blob/colab/demo_notebooks/what_is_featuretools.ipynb
+   :alt: Open in Colab
+   :align: right
 
 What is Featuretools?
 ---------------------
-
-
 .. image:: images/featuretools-logo.png
    :width: 500 px
    :alt: Featuretools

@@ -1,4 +1,9 @@
 .. _primitives:
+.. currentmodule:: featuretools
+.. image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/Featuretools/featuretools/blob/colab/demo_notebooks/feature_primitives.ipynb
+   :alt: Open in Colab
+   :align: right
 
 Feature primitives
 ~~~~~~~~~~~~~~~~~~

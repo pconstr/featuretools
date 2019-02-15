@@ -1,5 +1,9 @@
 .. _deep-feature-synthesis:
 .. currentmodule:: featuretools
+.. image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/Featuretools/featuretools/blob/colab/demo_notebooks/deep_feature_synthesis.ipynb
+   :alt: Open in Colab
+   :align: right
 
 Deep Feature Synthesis
 ======================

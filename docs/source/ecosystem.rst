@@ -1,3 +1,6 @@
+.. _ecosystem:
+.. currentmodule:: featuretools
+
 :description: A list of libraries, use cases / demos, and tutorials that leverage Featuretools
 
 ======================

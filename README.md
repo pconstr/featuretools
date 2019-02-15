@@ -14,7 +14,7 @@
 [![Anaconda-Server Badge](https://anaconda.org/conda-forge/featuretools/badges/version.svg)](https://anaconda.org/conda-forge/featuretools)
 [![StackOverflow](http://img.shields.io/badge/questions-on_stackoverflow-blue.svg)](https://stackoverflow.com/questions/tagged/featuretools)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/featuretools.svg)](https://pypistats.org/packages/featuretools)
-
+<a href="https://colab.research.google.com/github/Featuretools/featuretools/blob/colab/demo_notebooks/what_is_featuretools.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 [Featuretools](https://www.featuretools.com) is a python library for automated feature engineering. See the [documentation](https://docs.featuretools.com) for more information.
 
@@ -70,13 +70,11 @@ customer_id                                                                     
 We now have a feature vector for each customer that can be used for machine learning. See the [documentation on Deep Feature Synthesis](https://docs.featuretools.com/automated_feature_engineering/afe.html) for more examples.
 
 ## Demos
-**Predict Next Purchase**
-
-[Repository](https://github.com/Featuretools/predict_next_purchase/) | [Notebook](https://github.com/Featuretools/predict_next_purchase/blob/master/Tutorial.ipynb)
-
-In this demonstration, we use a multi-table dataset of 3 million online grocery orders from Instacart to predict what a customer will buy next. We show how to generate features with automated feature engineering and build an accurate machine learning pipeline using Featuretools, which can be reused for multiple prediction problems. For more advanced users, we show how to scale that pipeline to a large dataset using Dask.
-
-For more examples of how to use Featuretools, check out our [demos](https://www.featuretools.com/demos) page.
+- **Predict Next Purchase**
+   * [Repository](https://github.com/Featuretools/predict_next_purchase/) | [Notebook](https://github.com/Featuretools/predict_next_purchase/blob/master/Tutorial.ipynb)
+	* In this demonstration, we use a multi-table dataset of 3 million online grocery orders from Instacart to predict what a customer will buy next. We show how to generate features with automated feature engineering and build an accurate machine learning pipeline using Featuretools, which can be reused for multiple prediction problems. For more advanced users, we show how to scale that pipeline to a large dataset using Dask.
+- **Tutorial in [Google Colaboratory](https://colab.research.google.com/github/Featuretools/featuretools/blob/colab/demo_notebooks/what_is_featuretools.ipynb)**
+- For more examples of how to use Featuretools, check out our [demos](https://www.featuretools.com/demos) page.
 
 ## Testing & Development
 
@@ -116,4 +114,3 @@ BibTeX entry:
 </a>
 
 Featuretools is an open source project created by [Feature Labs](https://www.featurelabs.com/). To see the other open source projects we're working on visit Feature Labs [Open Source](https://www.featurelabs.com/open). If building impactful data science pipelines is important to you or your business, please [get in touch](https://www.featurelabs.com/contact/).
-

@@ -1,6 +1,9 @@
 .. _handling-time:
-
 .. currentmodule:: featuretools
+.. image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/Featuretools/featuretools/blob/colab/demo_notebooks/handling_time.ipynb
+   :alt: Open in Colab
+   :align: right
 
 Handling Time
 =============
@@ -49,7 +52,7 @@ The ``transactions`` entity has one row for every transaction and a ``transactio
 
     es_mc['customers'].df
 
-Here we have two time columns ``join_date`` and ``date_of_birth``. While either column might be useful for making features, the ``join_date`` should be used as the time index. It represents when the data owner learns about the existence of a given customer. Generically: *the time index is the first time anything from a row can be known to the dataset owner*. Rows are treated as non-existent prior to the time index. 
+Here we have two time columns ``join_date`` and ``date_of_birth``. While either column might be useful for making features, the ``join_date`` should be used as the time index. It represents when the data owner learns about the existence of a given customer. Generically: *the time index is the first time anything from a row can be known to the dataset owner*. Rows are treated as non-existent prior to the time index.
 
 .. important::
 
@@ -86,14 +89,14 @@ We will use all of the information between the ``time_index`` of rows ``1``, ``2
 
     ct = pd.DataFrame()
     ct['customer_id'] = [1, 2, 3]
-    ct['time'] = pd.to_datetime(['2014-1-1 04:00', 
+    ct['time'] = pd.to_datetime(['2014-1-1 04:00',
                                  '2014-1-1 04:00',
                                  '2014-1-1 04:00'])
     ct['label'] = [True, True, False]
     ct
-    fm, features = ft.dfs(entityset=es_mc, 
-                          target_entity='customers', 
-                          cutoff_time=ct, 
+    fm, features = ft.dfs(entityset=es_mc,
+                          target_entity='customers',
+                          cutoff_time=ct,
                           cutoff_time_in_index=True)
     fm
 
@@ -114,20 +117,20 @@ The :func:`Flights <demo.load_flight>` entityset is a prototypical example of a 
 
 For every trip we have real arrival and departure times and scheduled arrival and departure times.
 
-With the columns we have, it would be problematic for the ``scheduled_dep_time``, to be the time index: flights are scheduled far in advance!  If the time index were set to the scheduled departure time, we wouldn't be able to know anything about the flight at all until it was boarded. 
+With the columns we have, it would be problematic for the ``scheduled_dep_time``, to be the time index: flights are scheduled far in advance!  If the time index were set to the scheduled departure time, we wouldn't be able to know anything about the flight at all until it was boarded.
 
 However, it's possible to know many things about a trip six months or more before it takes off; the trip distance, carrier, flight number and even when a flight is supposed to leave and land are always known before we buy a ticket. Our ``time_index`` exists to reflect the reality that those can be known much before the scheduled departure time.
 
-That being said, not all columns can be known at our time index six months in advance. If we were able to know the real arrival time of the plane before we booked, we would have great success in predicting delays! 
+That being said, not all columns can be known at our time index six months in advance. If we were able to know the real arrival time of the plane before we booked, we would have great success in predicting delays!
 
 .. image:: ../images/flight_ti_1.png
    :width: 400 px
    :alt: flight time index diagram
    :align: center
 
-In this diagram of a row, we have set the ``time_index`` to the time the flight was scheduled. However, any information about what happens to the flight after it departs is **invalid** for use at that time. If we were to use any of that information prior to when the flight lands, we would be leaking labels. 
+In this diagram of a row, we have set the ``time_index`` to the time the flight was scheduled. However, any information about what happens to the flight after it departs is **invalid** for use at that time. If we were to use any of that information prior to when the flight lands, we would be leaking labels.
 
-While one option would be to remove that data from the entityset, a better option would be to use that data somehow. To that end, it's possible to set a ``secondary_time_index`` which can mark specific columns as available at a later date. The ``secondary_time_index`` of this row is set to the arrival time. 
+While one option would be to remove that data from the entityset, a better option would be to use that data somehow. To that end, it's possible to set a ``secondary_time_index`` which can mark specific columns as available at a later date. The ``secondary_time_index`` of this row is set to the arrival time.
 
 .. image:: ../images/flight_ti_2.png
    :width: 400 px
@@ -158,9 +161,9 @@ An entity can have a third, hidden, time index called the ``last_time_index``. M
 Flight Predictions
 ~~~~~~~~~~~~~~~~~~~
 
-Let's make features at some varying times in the flight example. Trip ``14`` is a flight from CLT to PHX on January 31 2017 and trip ``92`` is a flight from PIT to DFW on January 1. We can set any cutoff time before the flight is scheduled to depart, emulating how we would make the prediction at that point in time. 
+Let's make features at some varying times in the flight example. Trip ``14`` is a flight from CLT to PHX on January 31 2017 and trip ``92`` is a flight from PIT to DFW on January 1. We can set any cutoff time before the flight is scheduled to depart, emulating how we would make the prediction at that point in time.
 
-We set two cutoff times for trip ``14`` at two different times: one which is more than a month before the flight and another which is only 5 days before. For trip ``92``, we'll only set one cutoff time three days before it is scheduled to leave. 
+We set two cutoff times for trip ``14`` at two different times: one which is more than a month before the flight and another which is only 5 days before. For trip ``92``, we'll only set one cutoff time three days before it is scheduled to leave.
 
 .. image:: ../images/flight_ct.png
    :width: 500 px
@@ -173,7 +176,7 @@ Our cutoff time dataframe looks like this:
 
     ct_flight = pd.DataFrame()
     ct_flight['trip_log_id'] = [14, 14, 92]
-    ct_flight['time'] = pd.to_datetime(['2016-12-28', 
+    ct_flight['time'] = pd.to_datetime(['2016-12-28',
                                         '2017-1-25',
                                         '2016-12-28'])
     ct_flight['label'] = [True, True, False]
@@ -183,9 +186,9 @@ These instructions say to build two rows for trip ``14`` using data from differe
 
 .. ipython:: python
 
-    fm, features = ft.dfs(entityset=es_flight, 
-                          target_entity='trip_logs', 
-                          cutoff_time=ct_flight, 
+    fm, features = ft.dfs(entityset=es_flight,
+                          target_entity='trip_logs',
+                          cutoff_time=ct_flight,
                           cutoff_time_in_index=True)
     fm[['label', 'flight_id', 'flights.MAX(trip_logs.arr_delay)', 'MONTH(scheduled_dep_time)', 'DAY(scheduled_dep_time)']]
 
@@ -216,7 +219,7 @@ The training window in DFS limits the amount of past data that can be used while
 
 This works well for :class:`entities <Entity>` where an instance occurs at a single point in time. However, sometimes an instance can happen at many points in time.
 
-For example, suppose a customer’s session has multiple transactions which can happen at different points in time. If we are trying to count the number of sessions a user had in a given time period, we often want to count all sessions that were active during the training window. To accomplish this, we need to not only know when a session starts, but when it ends. The last time that an instance appears in the data is stored as the ``last_time_index`` of an entity. We can compare the time index and the last time index of ``sessions``: 
+For example, suppose a customer’s session has multiple transactions which can happen at different points in time. If we are trying to count the number of sessions a user had in a given time period, we often want to count all sessions that were active during the training window. To accomplish this, we need to not only know when a session starts, but when it ends. The last time that an instance appears in the data is stored as the ``last_time_index`` of an entity. We can compare the time index and the last time index of ``sessions``:
 
 .. ipython:: python
 
@@ -271,7 +274,7 @@ If your cutoff times are the ones used above:
 
     ct_flight
 
-Then passing in ``window_size='1h'`` and ``num_windows=2`` makes one row an hour over the last two hours to produce the following new dataframe. The result can be directly passed into DFS to make features at the different time points. 
+Then passing in ``window_size='1h'`` and ``num_windows=2`` makes one row an hour over the last two hours to produce the following new dataframe. The result can be directly passed into DFS to make features at the different time points.
 
 .. ipython:: python
 
@@ -286,4 +289,4 @@ Then passing in ``window_size='1h'`` and ``num_windows=2`` makes one row an hour
                           cutoff_time_in_index=True)
     fm
 
-    
+

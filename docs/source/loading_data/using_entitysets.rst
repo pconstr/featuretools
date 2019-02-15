@@ -1,4 +1,9 @@
 .. _using-entitysets:
+.. currentmodule:: featuretools
+.. image:: https://colab.research.google.com/assets/colab-badge.svg
+   :target: https://colab.research.google.com/github/Featuretools/featuretools/blob/colab/demo_notebooks/representing_data_with_entitysets.ipynb
+   :alt: Open in Colab
+   :align: right
 
 Representing Data with EntitySets
 =================================
