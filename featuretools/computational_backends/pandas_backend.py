@@ -504,12 +504,21 @@ class PandasBackend(ComputationalBackend):
             # Apply the non-aggregable functions generate a new dataframe, and merge
             # it with the existing one
             if len(to_apply):
+                to_apply = list(to_apply)
                 wrap = agg_wrapper(to_apply, self.time_last)
                 # groupby_var can be both the name of the index and a column,
                 # to silence pandas warning about ambiguity we explicitly pass
                 # the column (in actuality grouping by both index and group would
                 # work)
                 to_merge = base_frame.groupby(base_frame[groupby_var], observed=True, sort=False).apply(wrap)
+                assert len(to_merge.columns) == len(to_apply)
+                for ff, c in zip(to_apply, to_merge.columns.values):
+                    expected_type = ff.primitive.return_type
+                    got_type = to_merge[c].dtype
+                    if expected_type == variable_types.Datetime and got_type==np.int64:
+                        print ('cast', c, 'from', got_type, 'to', expected_type)
+                        to_merge[c] = pd.to_datetime(to_merge[c])
+                        
                 frame = pd.merge(left=frame, right=to_merge,
                                  left_index=True,
                                  right_index=True, how='left')
